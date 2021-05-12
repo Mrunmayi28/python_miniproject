@@ -1,5 +1,5 @@
 from django.contrib import admin
-from home.models import formed,academy,stu_info
+from home.models import formed,academy,stu_info,student_add
 
 # Register your models here.
 

@@ -10,7 +10,7 @@ def logged(request):
             Contact=request.POST['Contact']
             email=request.POST['email']
             print(Name, Contact, email)
-            Plogin=formed(Name=Name  , Contact=Contact , email='email')
+            Plogin=formed(Name=Name  , Contact=Contact , email=email)
             Plogin.save()
             print("Successfully Saved")
             return render(request,"plogin.html")
@@ -80,6 +80,15 @@ def proctor(request):
 
 def succes(request):
     return render(request,"succes.html")
+
+def pmain(request):
+    return render(request,"pmain.html")
+
+def search1(request):
+    return render(request,"search1.html")
+
+def chart2(request):
+    return render(request,"chart2.html")
 
        
 

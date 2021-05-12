@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css"> 
+
+  </head>
+  <body>
+  <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+          <img src="logo.jpg" width="45" height="45" class="d-inline-block align-top" alt="logo" loading="lazy">
+          Vidyavardhini's College of Engineering &amp; Technology
+        </a>
+        <ul class="nav justify-content-end">
+        <li class="nav-item">
+        
+        <li class="nav-item">
+          <a class="nav-link mx-5" href="index.html">LogOut</a>
+        </li>
+      </ul>
+      </nav>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mt-4">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">How to fetch or search data</h4>
+            </div>
+            <div class="card-body">
+              <div class="col-md-6">
+              <form action="" method="POST">
+                <div class="form-group">
+                  <input type="text" name="get_id" class="form-control" placeholder="Enter ID" required>
+                </div>
+                <button type="submit" name="search_by_id" class="btn btn-primary">Search</button>               
+              </form>  
+              </div>
+            </div>
+            <!-- php  -->
+            <?php
+            $connection = mysqli_connect("localhost", "root","","proctor_form");  
+
+            if(isset($_POST['search_by_id']))
+            {
+          
+              $id = $_POST['get_id'];
+              $query = "SELECT id	roll, dept,	batch, name, fa_name,	mo_name, l_name, dob	, email_id, ph_no, current_y	,compln_y FROM student_info WHERE ID='$id' ";
+              $query_run = mysqli_query($connection, $query);
+
+
+            ?>
+
+              <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">id_no</th>
+                    <th scope="col">roll_no</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Father's Name</th>
+                    <th scope="col">Mother's Name</th>
+                    <th scope="col">Surname</th>
+                    <th scope="col">dept</th>
+                    <th scope="col">batch</th>
+                    <th scope="col">Year of study</th>
+                    <th scope="col">dob</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">emailid</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                <?php
+                if(mysqli_num_rows($query_run) > 0)
+                {
+                  while($row = mysqli_fetch_array($query_run))
+                  {
+                    ?>  
+                      <tr>
+                        <td><?php echo $row['id']; ?></td>
+                        <td><?php echo $row['roll']; ?></td>
+                        <td><?php echo $row['name']; ?></td>
+                        <td><?php echo $row['fa_name']; ?></td>
+                        <td><?php echo $row['mo_name']; ?></td>
+                        <td><?php echo $row['l_name']; ?></td>
+                        <td><?php echo $row['dept']; ?></td>
+                        <td><?php echo $row['batch']; ?></td>
+                        <td><?php echo $row['current_y	']; ?></td>
+                        <td><?php echo $row['dob']; ?></td>
+                        <td><?php echo $row['ph_no']; ?></td>
+                        <td><?php echo $row['email_id']; ?></td>
+                      </tr>
+                    <?php  
+                  }
+                }  
+                else
+                {
+                    ?>
+                    <tr>
+                      <td colspan = "6">No Record Found</td>
+                    </tr>
+                    <?php
+                }      
+                ?>            
+
+                </tbody>
+              </table>
+              </div>
+              <?php
+            }
+            ?>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- php -->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

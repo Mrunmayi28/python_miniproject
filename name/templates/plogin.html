@@ -13,11 +13,11 @@
      {% load static %}
     <link rel="stylesheet" href={% static 'style.css' %}>
   </head>
-  <body>
+  <body id="body">
     <div class="card " style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">Login Form</h5>
-     <form method="POST" action="plogin">
+     <form method="POST" action="proctor">
      {% csrf_token %}
   <div class="mb-3">
     <label for="Name " class="form-label">Name</label>
@@ -29,15 +29,30 @@
    </div>
   <div class="mb-3">
     <label for="email" class="form-label">Email Address</label>
-    <input type="email" name="email" class="form-control" id="exampleInputPassword1">
+    <input type="email" id='email' name="email" class="form-control">
   </div>
   
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" onclick='proctor()' class="btn btn-primary">Submit</button>
+  <div id='space'></div>
+
 </form>
   </div>
 </div>
     <!-- Optional JavaScript; choose one of the two! -->
-
+    <script>
+      function proctor(){
+        var Name = document.getElementById('Name').value;
+        var Contact = document.getElementById('Contact').value;
+        var email = document.getElementById('email').value;
+        if(Name =='admin' && Contact == 56789 && email == 'admin@gmail.com'){
+          document.getElementById('space').innerHTML ="login successfully"
+          //document.getElementById("space").write(<a href='proctor'>proctor</a>)
+        }
+        else{
+          document.getElementById('space').innerHTML ="try again"
+        }
+      }
+    </script>
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 
