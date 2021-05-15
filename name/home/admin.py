@@ -7,3 +7,6 @@ admin.site.register(formed)
 admin.site.register(academy)
 admin.site.register(stu_info)
 
+@admin.register(student_add)
+class Adminstudent_add(admin.ModelAdmin):
+    list_display = ('id','name','number')

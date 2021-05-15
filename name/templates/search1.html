@@ -13,7 +13,8 @@
   <body>
   <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="#">
-          <img src="logo.jpg" width="45" height="45" class="d-inline-block align-top" alt="logo" loading="lazy">
+          {% load static%}
+          <img src={% static 'logo.jpg' %} width="45" height="45" class="d-inline-block align-top" alt="logo" loading="lazy">
           Vidyavardhini's College of Engineering &amp; Technology
         </a>
         <ul class="nav justify-content-end">

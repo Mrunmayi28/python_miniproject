@@ -9,7 +9,7 @@
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>window.location</title>
      {% load static %}
     <link rel="stylesheet" href={% static 'style.css' %}>
   </head>
@@ -20,18 +20,39 @@
      <form method="POST" action="plogin">
      {% csrf_token %} 
    <div class="mb-3">
-    <label for="id " class="form-label">Student ID:</label>
-    <input type="text" name="id" class="form-control" id="Contact" >
+    <label for="id " class="form-label">Student Name:</label>
+    <input type="text" name="st_name" class="form-control" id="st_name" >
    </div>
   <div class="mb-3">
-    <label for="password class="form-label">Password</label>
-    <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+    <label for="text" class="form-label">Student ID:</label>
+    <input type="text" name="id" class="form-control" id="id">
   </div>
   
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="button" onclick='slogin()' class="btn btn-primary">Submit</button>
+  <div id='space'></div>
 </form>
+
   </div>
 </div>
+<script>
+  function slogin()
+  {
+    var Name = document.getElementById('st_name').value;
+    var id = document.getElementById('id').value;
+    if(Name =='Insha' && id == 19212000){
+     window.location ='academics';
+    }
+    else if(Name =='Mrunmayi' && id == 19212001){
+      window.location ='academics';
+     }
+     else if(Name =='Harshita' && id == 19212002){
+      window.location ='academics';
+     }
+    else{
+      document.getElementById('space').innerHTML ="try again"
+    }
+  }
+</script>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

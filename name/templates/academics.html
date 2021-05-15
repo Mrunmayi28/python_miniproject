@@ -9,12 +9,13 @@
     <link rel="stylesheet" href="css\style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
-    <title>academics</title>
+    <title>window.location</title>
   </head>
   <body>
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="#">
-          <img src="logo.jpg" width="45" height="45" class="d-inline-block align-top" alt="logo" loading="lazy">
+          {% load static %}
+          <img src={% static 'logo.jpg' %} width="45" height="45" class="d-inline-block align-top" alt="logo" loading="lazy">
           Vidyavardhini's College of Engineering &amp; Technology
         </a>
         <ul class="nav justify-content-end">
@@ -40,7 +41,7 @@
       </nav>
       <div class="container my-5">
   <label><h5>First Year</h5></label><!--FirstYear-->
-    <form method="POST" action="certifications" class="row g-3">
+    <form method="POST" action="/certifications" class="row g-3">
       {% csrf_token %}
   <div class="col-md-6">
     <label for="cgpa" class="form-label">CGPA</label>
@@ -74,13 +75,14 @@
     <label for="kt" class="form-label">No. Of kt's</label>
     <select name ='kt'class="form-select">
       <option selected>Choose...</option>
+      <option>0</option>
       <option>1</option>
       <option>2</option>
       <option>3</option>
       <option>4</option>
     </select>
   </div>
-  <button type="submit" id="acadamics-submit"class="btn btn-primary">SUBMIT</button>
+  <button type="submit" id="submit" class="btn btn-primary">SUBMIT</button>
 </form>
 </div><!--container div-->
 

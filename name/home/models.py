@@ -10,16 +10,14 @@ class formed(models.Model):
         db_table = "Formeds"
 
 class academy(models.Model):
-    cgpa = models.FloatField(max_length=10)
-    percentage = models.FloatField(max_length=10)
-    subject1 = models.FloatField(max_length=10)
-    subject2 = models.FloatField(max_length=10)
-    subject3 = models.FloatField(max_length=10)
-    subject4 = models.FloatField(max_length=10)
-    subject5 = models.FloatField(max_length=10)
-    kt       = models.FloatField(max_length=10)
-    class Meta:
-        db_table = "Academys"
+    cgpa = models.FloatField(max_length=70)
+    percentage = models.FloatField(max_length=70)
+    subject1 = models.FloatField(max_length=70)
+    subject2 = models.FloatField(max_length=70)
+    subject3 = models.FloatField(max_length=70)
+    subject4 = models.FloatField(max_length=70)
+    subject5 = models.FloatField(max_length=70)
+    kt       = models.FloatField(max_length=70)
 
 class stu_info(models.Model):
     idNumber = models.IntegerField()
@@ -51,5 +49,4 @@ class stu_info(models.Model):
 
 class student_add(models.Model):
     name = models.CharField(max_length=100)
-    email = models.EmailField(max_length=100)
-    password = models.CharField(max_length=70)
+    number = models.CharField(max_length=70)

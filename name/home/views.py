@@ -1,5 +1,6 @@
-from django.shortcuts import render,HttpResponse
-from home.models import formed,academy,stu_info
+from django.shortcuts import render,HttpResponseRedirect
+from home.models import formed,academy,stu_info,student_add
+from . forms import student_addform
 
 # Create your views here.
 def index(request):
@@ -67,12 +68,11 @@ def student_academics(request):
         print(cgpa , percentage, subject1 , subject2 ,subject3 ,subject4 ,subject5 ,kt)
         acad = academy(cgpa = cgpa , percentage = percentage , subject1 = subject1,subject2 = subject2,subject3 = subject3,subject4 = subject4,subject5 = subject5, kt=kt)
         acad.save()    
-        return render(request,"certifications.html")
+        return render(request,"/certifications.html")
     else:
         return render(request,"academics.html")
 
 def certifications(request):
-
     return render(request,"certifications.html")
 
 def proctor(request):
@@ -81,8 +81,22 @@ def proctor(request):
 def succes(request):
     return render(request,"succes.html")
 
-def pmain(request):
-    return render(request,"pmain.html")
+def pmain_base(request):
+    return render(request,'pmain_base.html')
+
+def pmain_add(request):
+    if request.method == 'POST':
+        fm = student_addform(request.POST)
+        if fm.is_valid():
+            name = fm.cleaned_data['name']
+            number =fm.cleaned_data['number']
+            reg = student_add(name = name , number = number)
+            reg.save()
+            fm = student_addform()
+    else:
+        fm = student_addform()
+    stud = student_add.objects.all()
+    return render(request,"pmain_add.html" , {'form':fm , 'stu':stud})
 
 def search1(request):
     return render(request,"search1.html")
@@ -90,7 +104,20 @@ def search1(request):
 def chart2(request):
     return render(request,"chart2.html")
 
-       
+def delete_data(request,id):
+    if request.method == 'POST':
+        pi = student_add.objects.get(pk=id)
+        pi.delete()
+        return HttpResponseRedirect('/pmain_add')
 
-
-
+   #Update the student information 
+def update_data(request,id):
+    if request.method == 'POST':
+        pi = student_add.objects.get(pk=id)
+        fm = student_addform(request.POST , instance = pi)
+        if fm.is_valid():
+            fm.save()
+    else:
+        pi = student_add.objects.get(pk=id)
+        fm = student_addform(instance = pi)
+    return render(request,'pmain_update.html',{'form':fm})
