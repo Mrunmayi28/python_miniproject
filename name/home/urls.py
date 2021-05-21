@@ -15,6 +15,7 @@ urlpatterns = [
     path('pmain_add',views.pmain_add ,name='pmain_add.html'),
     path('search1',views.search1, name='search1'),
     path('chart2',views.chart2,name='chart2'),
+    path('viewdata',views.data, name = 'viewdata'),
     path('delete/<int:id>/',views.delete_data,name='delete_data'),
     path('<int:id>/',views.update_data,name='updatedata')
     

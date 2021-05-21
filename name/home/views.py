@@ -1,6 +1,6 @@
 from django.shortcuts import render,HttpResponseRedirect
-from home.models import formed,academy,stu_info,student_add
-from . forms import student_addform
+from home.models import formed,academy,stu_info,student_add,certi
+from . forms import student_addform, student_academy
 
 # Create your views here.
 def index(request):
@@ -17,6 +17,9 @@ def logged(request):
             return render(request,"plogin.html")
         else:
             return render(request,"plogin.html")
+
+def data(request):
+    return render(request,'viewdata.html')
 
 def slogin(request):
     return render(request,"slogin.html")
@@ -36,7 +39,7 @@ def personalinfo(request):
         student_email = request.POST['student_email']
         phone = request.POST['phone']
         completion_year = request.POST['completion_year']
-        year = request.POST['year']
+        current_year = request.POST['current_year']
         address = request.POST['address']
         country = request.POST['country']
         state = request.POST['state']
@@ -48,7 +51,7 @@ def personalinfo(request):
         designation_mother = request.POST['designation_mother']
         designation_father = request.POST['designation_father']
         personal = stu_info(idNumber = idNumber,roll = roll,department = department, student_name = student_name,father_name = father_name,mother_name = mother_name,last_name = last_name,photo = photo,
-        sign = sign,dob = dob, student_email = student_email,phone = phone,completion_year = completion_year,year = year, address = address,country = country, state = state,district = district, email_mother =email_mother,
+        sign = sign,dob = dob, student_email = student_email,phone = phone,completion_year = completion_year,current_year = current_year, address = address,country = country, state = state,district = district, email_mother =email_mother,
         email_father = email_father,number_father = number_father,number_mother = number_mother,designation_mother = designation_mother,designation_father = designation_father)
         personal.save() 
         return render(request,"succes.html")
@@ -57,23 +60,35 @@ def personalinfo(request):
 
 def student_academics(request):
     if request.method == 'POST':
-        cgpa = request.POST['cgpa'] 
-        percentage = request.POST['percentage'] 
-        subject1 = request.POST['subject1']
-        subject2 = request.POST['subject2']
-        subject3 = request.POST['subject3']
-        subject4 = request.POST['subject4']
-        subject5 = request.POST['subject5']
-        kt = request.POST['kt']
-        print(cgpa , percentage, subject1 , subject2 ,subject3 ,subject4 ,subject5 ,kt)
-        acad = academy(cgpa = cgpa , percentage = percentage , subject1 = subject1,subject2 = subject2,subject3 = subject3,subject4 = subject4,subject5 = subject5, kt=kt)
-        acad.save()    
-        return render(request,"/certifications.html")
+        am = student_academy(request.POST)
+        if am.is_valid():
+            cgpa = am.cleaned_data['cgpa'] 
+            percentage = am.cleaned_data['percentage'] 
+            subject1 = am.cleaned_data['subject1']
+            subject2 = am.cleaned_data['subject2']
+            subject3 = am.cleaned_data['subject3']
+            subject4 = am.cleaned_data['subject4']
+            subject5 = am.cleaned_data['subject5']
+            kt = am.cleaned_data['kt']
+            acc = academy( cgpa = cgpa ,percentage = percentage ,subject1= subject1,
+            subject2= subject2,subject3= subject3,subject4= subject4,subject5= subject5,kt=kt)
+            acc.save()    
+            am = student_academy()
     else:
-        return render(request,"academics.html")
+        am = student_academy()
+    acad  = academy.objects.all()
+    return render(request,"academics.html" , {'form':am , 'acad':acad})
+
 
 def certifications(request):
-    return render(request,"certifications.html")
+    if request.method == 'POST':
+        internship = request.POST['internship']
+        course = request.POST['course']
+        cer = certi(internship = internship , course = course)
+        cer.save()
+        return render(request, "certifications.html")
+    else:
+        return render(request,"certifications.html")
 
 def proctor(request):
     return render(request,"proctor.html")

@@ -2,6 +2,12 @@ from django.db import models
 import datetime
 
 # Create your models here.
+class certi(models.Model):
+    internship = models.FileField(null = True)
+    course = models.FileField(null = True)
+    class Meta:
+        db_table = "Certis"
+
 class formed(models.Model):
     Name = models.CharField(max_length=30)
     Contact=models.CharField(max_length=40)
@@ -10,14 +16,14 @@ class formed(models.Model):
         db_table = "Formeds"
 
 class academy(models.Model):
-    cgpa = models.FloatField(max_length=70)
-    percentage = models.FloatField(max_length=70)
-    subject1 = models.FloatField(max_length=70)
-    subject2 = models.FloatField(max_length=70)
-    subject3 = models.FloatField(max_length=70)
-    subject4 = models.FloatField(max_length=70)
-    subject5 = models.FloatField(max_length=70)
-    kt       = models.FloatField(max_length=70)
+    cgpa = models.TextField(max_length=70)
+    percentage = models.TextField(max_length=70)
+    subject1 = models.TextField(max_length=70)
+    subject2 = models.TextField(max_length=70)
+    subject3 = models.TextField(max_length=70)
+    subject4 = models.TextField(max_length=70)
+    subject5 = models.TextField(max_length=70)
+    kt       = models.TextField(max_length=70)
 
 class stu_info(models.Model):
     idNumber = models.IntegerField()
@@ -32,8 +38,8 @@ class stu_info(models.Model):
     dob = models.DateField()
     student_email = models.EmailField()
     phone = models.IntegerField()
-    completion_year = [(r,r) for r in range(2021, datetime.date.today().year+8)]
-    year = models.IntegerField(('year'), choices=completion_year, default=datetime.datetime.now().year)
+    completion_year = models.IntegerField()
+    current_year =models.TextField(max_length=50)
     address = models.CharField(max_length=20)
     country = models.CharField(max_length=10)
     state = models.CharField(max_length=15)

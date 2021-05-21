@@ -29,29 +29,7 @@
       </li>
     </ul>
     </nav>
-    <nav aria-label="Page navigation example" id="form-pagination">
-      <ul class="pagination  justify-content-center my-4">
-        
-        <li class="page-item"><a class="page-link" href="spersonalinfo">PERSONAL INFORMATION</a></li>
-        <li class="page-item"><a class="page-link" href="academics">ACADEMICS</a></li>
-        <li class="page-item"><a class="page-link" href="certifications">CERTIFICATIONS</a></li>
-        
-      </ul>
-    </nav>
-    <div class="container">
-    <div class="mb-3">
-      <form method="POST" action="/succes">
-        {% csrf_token %}
-      <label for="formFile" class="form-label">Upload Internship Certificates</label>
-      <input class="form-control" name='internship' type="file">
-    </div>
-    <div class="mb-3">
-      <label for="formFileMultiple" class="form-label">Upload the certificates of participating in any competition</label>
-      <input class="form-control" name='course' type="file" multiple>
-    </div>
-    <button type="submit" class="btn btn-primary">Primary</button>
-</form>
-  </div>
+  {% block content %}  {% endblock content %}
   
     <!-- Optional JavaScript; choose one of the two! -->
 
