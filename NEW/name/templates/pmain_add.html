@@ -1,0 +1,50 @@
+{% extends 'pmain_base.html'%}
+
+{% block content%}
+<div class="container">
+  <div class = ' container center my-4 col-sm-7'>
+    <h4  class='text-center alert alert-warning'>Add New Student</h4>
+    <form action="" method="POST">
+      {% csrf_token %}
+      {{ form.as_p}}
+      <input type = 'submit' class = 'btn btn-success' value = 'add'>
+    </form>
+  </div>
+  <div class=" container my-4 col-sm-7">
+    <h4 class = 'text-center alert alert-info'>Students</h4>
+    {% if stu %}
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">NAME</th>
+          <th scope="col">ID NUMBER</th>
+          <th scope="col">ACTION</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in stu %}
+        <tr>
+          <th scope="row">{{i.id}}</th>
+          <td>{{i.name}}</td>
+          <td>{{i.number}}</td>
+          <td>
+            <a href = '{% url "updatedata" i.id %}' class='btn btn-warning '>Edit</a>
+
+            <form action="{% url 'delete_data' i.id %}" method="POST" class="d-inline">
+              {% csrf_token%}
+              <input type="submit" class='btn btn-danger ' value ='Delete'>
+            </form>
+            
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    {% else %}
+    <h4 class='text-center alert alert-warning'>No Records</h4>
+    {% endif %}
+  </div>
+</div>
+{% endblock content%}
