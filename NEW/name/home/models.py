@@ -2,6 +2,7 @@ from django.db import models
 import datetime
 
 # Create your models here.
+
 class formed(models.Model):
     Name = models.CharField(max_length=30)
     Contact=models.CharField(max_length=40)

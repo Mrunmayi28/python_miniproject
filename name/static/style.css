@@ -1,5 +1,6 @@
 #body{
-    background-color:aqua;
+    background-image: url('image.jpg');
+    background-color: #cccccc;
 }
 
 .card {         /*my additional class name -for card*/
